@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="albums.html">Albums</a></li>
+            <li><a href="gym.html">Gym Muscle Group Tracker</a></li>
+        </ol>
+        <img class="ride-the-lightening-gif" src="ride-the-lightening-gif.gif" alt="ride-the-lightening-gif" >
+        <hr>
+        <h1>Metallica</h1>
+    </header>
+    <section>
+        <!--LOGIN SECTION-->
+        <div class="login-container">
+            <h2>Login</h2>
+            <form id="loginForm">
+                <label for="username">Username:</label>
+                <input type="text" id="username" required>
+                
+                <label for="password">Password:</label>
+                <input type="password" id="password" required>
+                
+                <button type="button" onclick="login()">Login</button>
+                <p id="message"></p>
+                <input type="number" id="money-amount" required>
+                <button type="button" onclick="addMoney()">Add Money</button>
+                <p id="balance"></p>
+            </form>
+            <p id="message"></p>
+        </div>
+    </section>
+    <section>
+        <h2>About</h2>
+        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Enim asperiores voluptate odit modi nostrum rerum neque inventore ducimus, voluptas cupiditate, illum vitae? Quisquam necessitatibus suscipit possimus dolor debitis, saepe beatae.</p>
+        <img src="Metallica.jpg" width="500" height="200">
+    </section>
+
+    <footer>
+        <h3>Contact</h3>
+            <ol>
+                <li>
+                    <a href="https://www.instagram.com/"
+                    target="_blank">
+                        <img src="Instagram-icon.png" width="30" height="30">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://twitter.com/"
+                    target="_blank">
+                        <img src="Twitter-icon.png" width="30" height="30">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/" target="_blank">
+                        <img src="Youtube-icon.png" width="30" height="30">
+                    </a>
+                </li>
+            </ol>
+             
+    </footer>
+</body>
+</html>

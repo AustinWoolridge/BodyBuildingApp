@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="gym.js" defer></script>
+    <script src="updategif.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="albums.html">Albums</a></li>
+            <li><a href="gym.html">Gym Muscle Group Tracker</a></li>
+        </ol>
+        <hr>
+        <h1>GYM</h1>
+    </header>
+
+
+    <div>
+        <label for="machineSelect">Select a Gym Machine:</label>
+        <select id="machineSelect">
+            <!--CHEST Movements-->
+            <optgroup label="Chest Movements">
+                <option value="chestpressMachine">Chest Press Machine</option>
+                <option value="inclineBenchPress">Incline Bench Press</option>
+                <option value="benchPress">Bench Press</option>
+                <option value="chestDips">Chest Dips</option>
+                <option value="hammerStrengthChestPress">Hammer Strength Chest Press</option>
+                <option value="pullover">Pullover</option>
+                <option value="frontInclineDumbbellRaise">Front Incline Dumbbell Raise</option>
+                <option value="flyMachine">Fly Machine</option>
+            </optgroup>
+            <!--BACK Movements-->
+            <optgroup label="Back Movements">
+                <option value="bentOverRow">Bent Over Row</option>
+                <option value="tBarRow">T-Bar Row</option>
+                <option value="45-degreeBentOverRow">45-degree Bent Over Row</option>
+                <option value="90-degreeBentOverRow">90-degree Bent Over Row</option>
+                <option value="shrug">Shrug</option>
+                <option value="closeGripPullUps">Close Grip Pull Ups</option>
+                <option value="wideGripPullUps">Wide Grip Pull Ups</option>
+                <option value="lowRow">Low Row</option>
+                <option value="seatedRow">Seated Row</option>
+                <option value="wideGripLatPulldown">Wide Grip Lat Pulldown</option>
+                <option value="closeGripLatPulldown">Close Grip Lat Pulldown</option>
+            </optgroup>
+            <!--LEG Movements-->
+            <optgroup label="Leg Movements">
+                <option value="squat">Squat</option>
+                <option value="legExtension">Leg Extension</option>
+                <option value="calfRaises">Calf Raises</option>
+                <option value="legPress">Leg Press</option>
+                <option value="legCurl">Leg Curl</option>
+                <option value="sumoDeadlift">Sumo Deadlift</option>
+            </optgroup>
+            <!--SHOULDER Movements-->
+            <optgroup label="Shoulder Movements">
+                <option value="facePull">Face Pull</option>
+                <!-- Shoulder Movements -->
+                <option value="barbellFacePull">Barbell Face Pull</option>
+                <option value="lateralRaise">Lateral Raise</option>
+                <option value="frontRaise">Front Raise</option>
+                <option value="shoulderPress">Shoulder Press</option>
+            </optgroup>
+            <!-- Add more options as needed -->
+        </select>
+
+        <!-- Container to display GIFs -->
+        <div id="gifContainer">
+        </div>
+
+        <div id="alertMessage" class="alert alert-success d-none" role="alert">
+            Gym Machine Selected!
+        </div>
+
+        <button onclick="updateMuscleGroups()" id="myButton">Update Muscle Groups</button>
+
+        <button onclick="insertData()">Insert Data</button>
+        <button onclick="fetchData()">Fetch Data</button>
+
+        <!-- Display fetched data here -->
+        <div id="dataContainer"></div>
+
+        <script>
+            // Function to insert data into MongoDB
+            async function insertData() {
+                try {
+                    debugger;
+                    const muscleDataDiv = document.getElementById("muscleData");
+                    const spans = muscleDataDiv.querySelectorAll('span');
+                    const data = {};
+                    spans.forEach(span => {
+                        const muscleName = span.parentNode.textContent.split(':')[0].trim();
+                        const muscleValue = span.textContent.trim();
+
+                        data[muscleName] = muscleValue;
+                    });
+
+                    const response = await axios.post('http://localhost:3000/insert', data);
+                    console.log(response.data);
+                } catch (error) {
+                    console.error('Error inserting data:', error);
+                }
+            }
+
+            // Function to fetch data from MongoDB
+            async function fetchData() {
+                try {
+                    const response = await axios.get('/fetch');
+                    console.log(response.data);
+                    // Display fetched data in the HTML
+                    document.getElementById('dataContainer').innerText = JSON.stringify(response.data);
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
+        </script>
+
+
+        <div id="muscleData">
+            <p>UpperChest: <span id="upperchest">0</span></p>
+            <p>MidChest: <span id="midchest">0</span></p>
+            <p>DownChest: <span id="downchest">0</span></p>
+            <p>FrontShoulders: <span id="frontshoulders">0</span></p>
+            <p>MidShoulders: <span id="midshoulders">0</span></p>
+            <p>BackShoulders: <span id="backshoulders">0</span></p>
+            <p>ShortHeadBiceps: <span id="shortheadbiceps">0</span></p>
+            <p>LongHeadBiceps: <span id="longheadbiceps">0</span></p>
+            <p>BrachialisBiceps: <span id="brachialisbiceps">0</span></p>
+            <p>LongHeadTriceps: <span id="longheadtriceps">0</span></p>
+            <p>MedialTriceps: <span id="medialtriceps">0</span></p>
+            <p>LateralHeadTriceps: <span id="lateralheadtriceps">0</span></p>
+            <p>UpperForearm: <span id="upperforearm">0</span></p>
+            <p>DownForearm: <span id="downforearm">0</span></p>
+            <!--Back muscles can be devided into 6 groups but many
+            muscles work together and hard to isolate them.
+            So here back muscles devided into 2 as up and down. Traps and lats-->
+            <p>Lats: <span id="lats">0</span></p>
+            <p>Traps: <span id="traps">0</span></p>
+            <p>Glutes: <span id="glutes">0</span></p>
+            <p>Hamstrings: <span id="hamstrings">0</span></p>
+            <p>Calves: <span id="calves">0</span></p>
+            <p>Quadriceps: <span id="quadriceps">0</span></p>
+        </div>
+    </div>
+
+    <footer>
+        <h3>Contact</h3>
+        <ol>
+            <li>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <img src="Instagram-icon.png" width="30" height="30">
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/" target="_blank">
+                    <img src="Twitter-icon.png" width="30" height="30">
+                </a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/" target="_blank">
+                    <img src="Youtube-icon.png" width="30" height="30">
+                </a>
+            </li>
+        </ol>
+
+    </footer>
+</body>
+
+</html>

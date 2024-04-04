@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header ol {
+    list-style: none;
+    padding: 0;
+}
+
+header ol li {
+    display: inline;
+    margin-right: 20px;
+}
+
+header ol li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+header ol li a:hover {
+    color: #ccc;
+}
+
+div {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+div select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+div button {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+div button:hover {
+    background-color: #555;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+footer h3 {
+    margin: 0;
+}
+
+footer ol {
+    list-style: none;
+    padding: 0;
+}
+
+footer ol li {
+    display: inline;
+    margin-right: 10px;
+}
+
+footer ol li a img {
+    vertical-align: middle;
+}
+
+#gifContainer {
+    width: 360px;
+    height: 360px;
+    overflow: hidden;
+    /* Optional: to hide any overflow if the GIF is larger */
+}
+
+#gifContainer img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}

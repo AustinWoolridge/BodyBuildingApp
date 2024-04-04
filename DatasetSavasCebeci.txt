@@ -1,0 +1,5 @@
+cable biceps curl : longheadbiceps
+dumbell biceps curl : longheadbiceps and shortheadbiceps same
+side bieps curl : longheadbiceps
+barbell biceps curl : shortheadbiceps
+reverse barbell biceps curl : birachialisbiceps

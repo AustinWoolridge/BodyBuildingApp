@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums</title>
+    <script src="gym.js" defer></script>
+    <script>
+        function get_median_of_first_week_expenses(expenses, firstSundays) {
+            let result = {};
+            debugger;
+
+            for (let year in expenses) {
+                if (firstSundays.hasOwnProperty(year)) {
+                    let month = firstSundays[year];
+
+                    if (expenses[year][month] && expenses[year][month]["food"]) {
+                        let foodExpenses = expenses[year][month]["food"];
+                        let fuelExpenses = expenses[year][month]["fuel"] || [];
+
+                        if (foodExpenses.length > 0 || fuelExpenses.length > 0) {
+                            let allExpenses = foodExpenses.concat(fuelExpenses);
+                            result[`${year}-${month}`] = calculateMedian(allExpenses);
+                        }
+                    }
+                }
+            }
+
+            return result;
+        }
+
+        function calculateMedian(array) {
+            array.sort((a, b) => a - b);
+
+            const mid = Math.floor(array.length / 2);
+
+            if (array.length % 2 === 0) {
+                return (array[mid - 1] + array[mid]) / 2;
+            } else {
+                return array[mid];
+            }
+        }
+
+        const expenses = {
+            "2023-01": {
+                "01": {
+                    "food": [22.11, 43, 11.72, 2.2, 36.29, 2.5, 19],
+                    "fuel": [210.22]
+                },
+                "09": {
+                    "food": [11.9],
+                    "fuel": [190.22]
+                }
+            },
+            "2023-03": {
+                "07": {
+                    "food": [20, 11.9, 30.20, 11.9]
+                },
+                "04": {
+                    "food": [10.20, 11.50, 2.5],
+                    "fuel": []
+                }
+            },
+            "2023-04": {}
+        };
+
+        const firstSundays = {
+            "2023-01": "01",
+            "2023-02": "05",
+            "2023-03": "05",
+            "2023-04": "02",
+            "2023-05": "07",
+            "2023-06": "04",
+            "2023-07": "02",
+            "2023-08": "06",
+            "2023-09": "03",
+            "2023-10": "01",
+            "2023-11": "05",
+            "2023-12": "03"
+        };
+
+        console.log(get_median_of_first_week_expenses(expenses, firstSundays));
+
+    </script>
+</head>
+
+<body>
+    <header>
+        <ol>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="albums.html">Albums</a></li>
+            <li><a href="gym.html">Gym Muscle Group Tracker</a></li>
+        </ol>
+        <hr>
+        <h1>GYM</h1>
+    </header>
+
+
+    <div>
+        <label for="machineSelect">Select a Gym Machine:</label>
+        <select id="machineSelect">
+            <!--CHEST Movements-->
+            <optgroup label="Chest Movements">
+                <option value="chestpressMachine">Chest Press Machine</option>
+                <option value="inclineBenchPress">Incline Bench Press</option>
+                <option value="benchPress">Bench Press</option>
+                <option value="chestDips">Chest Dips</option>
+                <option value="hammerStrengthChestPress">Hammer Strength Chest Press</option>
+                <option value="pullover">Pullover</option>
+                <option value="frontInclineDumbbellRaise">Front Incline Dumbbell Raise</option>
+                <option value="flyMachine">Fly Machine</option>
+            </optgroup>
+            <!--BACK Movements-->
+            <optgroup label="Back Movements">
+                <option value="bentOverRow">Bent Over Row</option>
+                <option value="tBarRow">T-Bar Row</option>
+                <option value="45-degreeBentOverRow">45-degree Bent Over Row</option>
+                <option value="90-degreeBentOverRow">90-degree Bent Over Row</option>
+                <option value="shrug">Shrug</option>
+                <option value="closeGripPullUps">Close Grip Pull Ups</option>
+                <option value="wideGripPullUps">Wide Grip Pull Ups</option>
+                <option value="lowRow">Low Row</option>
+                <option value="seatedRow">Seated Row</option>
+                <option value="wideGripLatPulldown">Wide Grip Lat Pulldown</option>
+                <option value="closeGripLatPulldown">Close Grip Lat Pulldown</option>
+            </optgroup>
+            <!--LEG Movements-->
+            <optgroup label="Leg Movements">
+                <option value="squat">Squat</option>
+                <option value="legExtension">Leg Extension</option>
+                <option value="calfRaises">Calf Raises</option>
+                <option value="legPress">Leg Press</option>
+                <option value="legCurl">Leg Curl</option>
+                <option value="sumoDeadlift">Sumo Deadlift</option>
+            </optgroup>
+            <!--SHOULDER Movements-->
+            <optgroup label="Shoulder Movements">
+                <option value="facePull">Face Pull</option>
+                <!-- Shoulder Movements -->
+                <option value="barbellFacePull">Barbell Face Pull</option>
+                <option value="lateralRaise">Lateral Raise</option>
+                <option value="frontRaise">Front Raise</option>
+                <option value="shoulderPress">Shoulder Press</option>
+            </optgroup>
+            <!-- Add more options as needed -->
+        </select>
+
+        <button onclick="updateMuscleGroups()">Update Muscle Groups</button>
+
+        <p>UpperChest: <span id="upperchest">0</span></p>
+        <p>MidChest: <span id="midchest">0</span></p>
+        <p>DownChest: <span id="downchest">0</span></p>
+        <p>FrontShoulders: <span id="frontshoulders">0</span></p>
+        <p>MidShoulders: <span id="midshoulders">0</span></p>
+        <p>BackShoulders: <span id="backshoulders">0</span></p>
+        <p>ShortHeadBiceps: <span id="shortheadbiceps">0</span></p>
+        <p>LongHeadBiceps: <span id="longheadbiceps">0</span></p>
+        <p>BrachialisBiceps: <span id="brachialisbiceps">0</span></p>
+        <p>LongHeadTriceps: <span id="longheadtriceps">0</span></p>
+        <p>MedialTriceps: <span id="medialtriceps">0</span></p>
+        <p>LateralHeadTriceps: <span id="lateralheadtriceps">0</span></p>
+        <p>UpperForearm: <span id="upperforearm">0</span></p>
+        <p>DownForearm: <span id="downforearm">0</span></p>
+        <p>Back: <span id="back">0</span></p>
+        <p>Glutes: <span id="glutes">0</span></p>
+        <p>Hamstrings: <span id="hamstrings">0</span></p>
+        <p>Calves: <span id="calves">0</span></p>
+        <p>Quadriceps: <span id="quadriceps">0</span></p>
+    </div>
+
+    <footer>
+        <h3>Contact</h3>
+        <ol>
+            <li>
+                <a href="https://www.instagram.com/" target="_blank">
+                    <img src="Instagram-icon.png" width="30" height="30">
+                </a>
+            </li>
+            <li>
+                <a href="https://twitter.com/" target="_blank">
+                    <img src="Twitter-icon.png" width="30" height="30">
+                </a>
+            </li>
+            <li>
+                <a href="https://www.youtube.com/" target="_blank">
+                    <img src="Youtube-icon.png" width="30" height="30">
+                </a>
+            </li>
+        </ol>
+
+    </footer>
+</body>
+
+</html>
