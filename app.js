@@ -9,10 +9,10 @@ const port = 3000; // Set your desired port number
 //Importing Cors app
 const cors = require('cors');
 
-
+require('dotenv').config();
 
 // MongoDB Connection URI
-//const uri = 'LOCATED IN THE IGNORED URI.TXT';
+const uri = process.env.MONGODB_URI;
 const dbName = 'sample_mflix'; // Replace with your database name
 const collectionName = 'muscleGroups'; // Replace with your collection name
 
