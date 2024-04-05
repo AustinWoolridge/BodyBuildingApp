@@ -1,3 +1,4 @@
+require('dotenv').config();
 // Import required modules
 const express = require('express');
 const { MongoClient } = require('mongodb');
@@ -12,7 +13,7 @@ const cors = require('cors');
 
 
 // MongoDB Connection URI
-//const uri = 'LOCATED IN THE IGNORED URI.TXT';
+const uri = process.env.MONGODB_URI;
 const dbName = 'sample_mflix'; // Replace with your database name
 const collectionName = 'muscleGroups'; // Replace with your collection name
 
