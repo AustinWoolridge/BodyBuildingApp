@@ -116,10 +116,34 @@
             // Function to fetch data from MongoDB
             async function fetchData() {
                 try {
-                    const response = await axios.get('/fetch');
-                    console.log(response.data);
-                    // Display fetched data in the HTML
-                    document.getElementById('dataContainer').innerText = JSON.stringify(response.data);
+                    const response = await axios.get('http://localhost:3000/fetch');
+                    const data = response.data;
+
+                    // Clear previous data
+                    const dataContainer = document.getElementById('dataContainer');
+                    dataContainer.innerHTML = '';
+
+                    // Iterate over each data object
+                    data.forEach((item, index) => {
+                        // Create a new <div> element to hold the data
+                        const itemDiv = document.createElement('div');
+                        itemDiv.classList.add('data-item');
+
+                        // Construct HTML content for each data item
+                        let htmlContent = `<h3>User ${index + 1}</h3><ul>`;
+                        for (const key in item) {
+                            if (key !== '_id') { // Exclude _id field
+                                htmlContent += `<li><strong>${key}:</strong> ${item[key]}</li>`;
+                            }
+                        }
+                        htmlContent += '</ul>';
+
+                        // Set the HTML content of the <div> element
+                        itemDiv.innerHTML = htmlContent;
+
+                        // Append the <div> element to the container
+                        dataContainer.appendChild(itemDiv);
+                    });
                 } catch (error) {
                     console.error('Error fetching data:', error);
                 }
