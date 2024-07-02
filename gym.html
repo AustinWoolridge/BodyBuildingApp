@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums</title>
+    <title>Gym Muscle Group Tracker</title>
     <link rel="stylesheet" href="style.css">
     <script src="gym.js" defer></script>
     <script src="updategif.js" defer></script>
@@ -93,7 +93,12 @@
         <button onclick="fetchData()">Fetch Data</button>
 
         <!-- Display fetched data here -->
-        <div id="dataContainer"></div>
+        <div id="dataContainer">
+            <p>Weekly, every muscle group should be working for 16 reps. Click <b>Update Muscle Groups</b> after every
+                time you use the Gym Machine.</p>
+            <p>Use <b>Insert Data</b> after you finish your workout for the day.</p>
+            <p>Use <b>Fetch Data</b> to see your records from previous weeks.</p>
+        </div>
 
         <script>
             // Function to insert data into MongoDB
