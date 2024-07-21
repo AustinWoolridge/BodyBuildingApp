@@ -1,5 +1,7 @@
 function updateMuscleGroups() {
 
+
+
     var machineSelect = document.getElementById("machineSelect");
     var selectedMachine = machineSelect.value;
     // Define muscle groups and their corresponding elements
@@ -165,17 +167,32 @@ function updateMuscleGroups() {
 
     function incrementMuscleGroups(groups) {
         var updatedMuscleGroups = "";
+        //WEEKLY GOAL REACHED! Start
+        var highValueMuscleGroups = "";
+        //WEEKLY GOAL REACHED! End
+
         for (group in groups) {
             if (groups.hasOwnProperty(group)) { //NOT REALLY NEED THIS LINE OF CODE.
                 var element = muscleGroups[group];
                 var currentValue = parseFloat(element.textContent);
                 element.textContent = currentValue + groups[group];
 
+                //WEEKLY GOAL REACHED! Start
+                var newValue = currentValue + groups[group];
+                element.textContent = newValue.toFixed(1);
+
+                if (newValue >= 16) {
+                    highValueMuscleGroups += `<p>${group.replace(/([a-z])([A-Z])/g, '$1 $2').toUpperCase()}: ${newValue.toFixed(1)}</p>`;
+                }
+                //WEEKLY GOAL REACHED! End
+
                 // Construct the string representation without symbols "" and {}
                 updatedMuscleGroups += group + ": " + groups[group] + " ";
             }
 
-
+            //WEEKLY GOAL REACHED! Start
+            document.getElementById("highValueMuscleGroups").innerHTML = highValueMuscleGroups;
+            //WEEKLY GOAL REACHED! End
         }
         // Display only the latest updated values in an alert message
         var alertMessage = document.getElementById('alertMessage');
@@ -183,6 +200,8 @@ function updateMuscleGroups() {
 
         alertMessage.classList.remove('d-none');
     }
+
+
 
 
 

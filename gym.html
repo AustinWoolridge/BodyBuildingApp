@@ -19,14 +19,14 @@
             <img src="icon.jpg" alt="icon.jpg">
             <ol>
                 <!--header content-->
-                <li><a href="index.html">Home</a></li>
-                <li><a href="gym.html">Gym Muscle Group Tracker</a></li>
+                <li><a href="index.html">1 - Home</a></li>
+                <li><a href="gym.html">2 - Gym Muscle Group Tracker</a></li>
+                <li><a href="gym.html">3 - Future app</a></li>
+                <li><a href="gym.html">4 - Future app</a></li>
             </ol>
         </container>
         <!--icon-->
 
-        <hr>
-        <h1>GYM</h1>
     </header>
 
 
@@ -92,6 +92,11 @@
         <button onclick="insertData()">Insert Data</button>
         <button onclick="fetchData()">Fetch Data</button>
 
+        <!-- WEEKLY GOAL REACHED! -->
+        <div id="highValueMuscleGroups">
+            <!-- Muscle groups with values 16 or above will be displayed here -->
+        </div>
+
         <!-- Display fetched data here -->
         <div id="dataContainer">
             <p>Weekly, every muscle group should be working for 16 reps. Click <b>Update Muscle Groups</b> after every
@@ -125,6 +130,11 @@
             // Function to fetch data from MongoDB
             async function fetchData() {
                 try {
+                    //make buttons disappear so user can only see the recordings.
+                    document.getElementById('updateButton').style.display = 'none';
+                    document.getElementById('insertButton').style.display = 'none';
+                    document.getElementById('fetchButton').style.display = 'none';
+
                     const response = await axios.get('http://localhost:3000/fetch');
                     const data = response.data;
 
@@ -191,7 +201,7 @@
         <h3>Contact</h3>
         <ol>
             <li>
-                <a href="https://www.instagram.com/" target="_blank">
+                <a href="https://www.instagram.com/batuhanok3/" target="_blank">
                     <img src="Instagram-icon.png" width="30" height="30">
                 </a>
             </li>
@@ -201,7 +211,7 @@
                 </a>
             </li>
             <li>
-                <a href="https://www.youtube.com/" target="_blank">
+                <a href="https://www.youtube.com/@austinwoolridge6868" target="_blank">
                     <img src="Youtube-icon.png" width="30" height="30">
                 </a>
             </li>
