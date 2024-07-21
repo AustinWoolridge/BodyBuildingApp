@@ -7,6 +7,7 @@
     <title>Gym Muscle Group Tracker</title>
     <link rel="stylesheet" href="style.css">
     <script src="gym.js" defer></script>
+    <script src="database.js" defer></script>
     <script src="updategif.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -25,157 +26,103 @@
                 <li><a href="gym.html">4 - Future app</a></li>
             </ol>
         </container>
-        <!--icon-->
 
     </header>
 
-    <div id="appInstructions">
-        <h1 style="text-align: center;">Gym Muscle Group Tracker</h1>
-        <h2 style="text-align: center;">- INSTRUCTIONS -</h2>
-        <p>1 - Weekly, every muscle group should be working for 16 reps. Choose the machine you are using and click
-            <b>Update Muscle Groups</b> after every
-            set.
-        </p>
-        <p>2 - Make sure every set goes close to <b>FAILURE</b> for max muscle growth.</p>
-        <p>3 - Use <b>Insert Data</b> after you finish your workout for the day.</p>
-        <p>4 - Use <b>Fetch Data</b> to see your records from previous weeks.</p>
-        <p>5 - Use <b>Fetch Data</b> to see your records from previous weeks.</p>
-    </div>
-
-    <div>
-        <label for="machineSelect">Select a Gym Machine:</label>
-        <select id="machineSelect">
-            <!--CHEST Movements-->
-            <optgroup label="Chest Movements">
-                <option value="chestpressMachine">Chest Press Machine</option>
-                <option value="inclineBenchPress">Incline Bench Press</option>
-                <option value="benchPress">Bench Press</option>
-                <option value="chestDips">Chest Dips</option>
-                <option value="hammerStrengthChestPress">Hammer Strength Chest Press</option>
-                <option value="pullover">Pullover</option>
-                <option value="frontInclineDumbbellRaise">Front Incline Dumbbell Raise</option>
-                <option value="flyMachine">Fly Machine</option>
-            </optgroup>
-            <!--BACK Movements-->
-            <optgroup label="Back Movements">
-                <option value="bentOverRow">Bent Over Row</option>
-                <option value="tBarRow">T-Bar Row</option>
-                <option value="45-degreeBentOverRow">45-degree Bent Over Row</option>
-                <option value="90-degreeBentOverRow">90-degree Bent Over Row</option>
-                <option value="shrug">Shrug</option>
-                <option value="closeGripPullUps">Close Grip Pull Ups</option>
-                <option value="wideGripPullUps">Wide Grip Pull Ups</option>
-                <option value="lowRow">Low Row</option>
-                <option value="seatedRow">Seated Row</option>
-                <option value="wideGripLatPulldown">Wide Grip Lat Pulldown</option>
-                <option value="closeGripLatPulldown">Close Grip Lat Pulldown</option>
-            </optgroup>
-            <!--LEG Movements-->
-            <optgroup label="Leg Movements">
-                <option value="squat">Squat</option>
-                <option value="legExtension">Leg Extension</option>
-                <option value="calfRaises">Calf Raises</option>
-                <option value="legPress">Leg Press</option>
-                <option value="legCurl">Leg Curl</option>
-                <option value="sumoDeadlift">Sumo Deadlift</option>
-            </optgroup>
-            <!--SHOULDER Movements-->
-            <optgroup label="Shoulder Movements">
-                <option value="facePull">Face Pull</option>
-                <!-- Shoulder Movements -->
-                <option value="barbellFacePull">Barbell Face Pull</option>
-                <option value="lateralRaise">Lateral Raise</option>
-                <option value="frontRaise">Front Raise</option>
-                <option value="shoulderPress">Shoulder Press</option>
-            </optgroup>
-            <!-- Add more options as needed -->
-        </select>
-
-        <!-- Container to display GIFs -->
-        <div id="gifContainer">
+    <div class="grid-container">
+        <div id="appInstructions">
+            <h1 style="text-align: center;">Gym Muscle Group Tracker</h1>
+            <h2 style="text-align: center;">- INSTRUCTIONS -</h2>
+            <p>1 - Weekly, every muscle group should be working for 16 reps. Choose the machine you are using and click
+                <b>Update Muscle Groups</b> after every
+                set.
+            </p>
+            <p>2 - Make sure every set goes close to <b>FAILURE</b> for max muscle growth.</p>
+            <p>3 - Click <b>Insert Data</b> after you finish your workout for the day.</p>
+            <p>4 - Click <b>Fetch Data</b> to see your records from previous weeks.</p>
+            <p>5 - Click <b>Fetch Data</b> to see your records from previous weeks.</p>
+            <p>6 - <b>Restart</b> the page if you make mistake to restart the complete workout day.</p>
         </div>
 
-        <div id="alertMessage" class="alert alert-success d-none" role="alert">
-            Gym Machine Selected!
+        <div id="selectingMachine">
+            <label for="machineSelect">Select a Gym Machine:</label>
+            <select id="machineSelect">
+                <!--CHEST Movements-->
+                <optgroup label="Chest Movements">
+                    <option value="chestpressMachine">Chest Press Machine</option>
+                    <option value="inclineBenchPress">Incline Bench Press</option>
+                    <option value="benchPress">Bench Press</option>
+                    <option value="chestDips">Chest Dips</option>
+                    <option value="hammerStrengthChestPress">Hammer Strength Chest Press</option>
+                    <option value="pullover">Pullover</option>
+                    <option value="frontInclineDumbbellRaise">Front Incline Dumbbell Raise</option>
+                    <option value="flyMachine">Fly Machine</option>
+                </optgroup>
+                <!--BACK Movements-->
+                <optgroup label="Back Movements">
+                    <option value="bentOverRow">Bent Over Row</option>
+                    <option value="tBarRow">T-Bar Row</option>
+                    <option value="45-degreeBentOverRow">45-degree Bent Over Row</option>
+                    <option value="90-degreeBentOverRow">90-degree Bent Over Row</option>
+                    <option value="shrug">Shrug</option>
+                    <option value="closeGripPullUps">Close Grip Pull Ups</option>
+                    <option value="wideGripPullUps">Wide Grip Pull Ups</option>
+                    <option value="lowRow">Low Row</option>
+                    <option value="seatedRow">Seated Row</option>
+                    <option value="wideGripLatPulldown">Wide Grip Lat Pulldown</option>
+                    <option value="closeGripLatPulldown">Close Grip Lat Pulldown</option>
+                </optgroup>
+                <!--LEG Movements-->
+                <optgroup label="Leg Movements">
+                    <option value="squat">Squat</option>
+                    <option value="legExtension">Leg Extension</option>
+                    <option value="calfRaises">Calf Raises</option>
+                    <option value="legPress">Leg Press</option>
+                    <option value="legCurl">Leg Curl</option>
+                    <option value="sumoDeadlift">Sumo Deadlift</option>
+                </optgroup>
+                <!--SHOULDER Movements-->
+                <optgroup label="Shoulder Movements">
+                    <option value="facePull">Face Pull</option>
+                    <!-- Shoulder Movements -->
+                    <option value="barbellFacePull">Barbell Face Pull</option>
+                    <option value="lateralRaise">Lateral Raise</option>
+                    <option value="frontRaise">Front Raise</option>
+                    <option value="shoulderPress">Shoulder Press</option>
+                </optgroup>
+                <!-- Add more options as needed -->
+            </select>
+
+            <!-- Container to display GIFs -->
+            <div id="gifContainer">
+            </div>
+
+            <div id="alertMessage" class="alert alert-success d-none" role="alert">
+                Gym Machine Selected!
+            </div>
+
+            <button onclick="updateMuscleGroups()" id="myButton">Update Muscle Groups</button>
+
+            <button onclick="insertData()">Insert Data</button>
+            <button onclick="fetchData()">Fetch Data</button>
+
+
+
         </div>
 
-        <button onclick="updateMuscleGroups()" id="myButton">Update Muscle Groups</button>
 
-        <button onclick="insertData()">Insert Data</button>
-        <button onclick="fetchData()">Fetch Data</button>
+        <div id="weeklyGoal">
+            <!-- WEEKLY GOAL REACHED! -->
+            <H6 style="text-align: center;">- WEEKLY GOAL REACHER FOR BELOW MUSCLES -</H6>
+            <div id="highValueMuscleGroups">
 
-        <!-- WEEKLY GOAL REACHED! -->
-        <div id="highValueMuscleGroups">
-            <!-- Muscle groups with values 15 or above will be displayed here -->
+                <!-- Muscle groups with values 15 or above will be displayed here -->
+            </div>
         </div>
-
         <!-- Display fetched data here -->
         <div id="dataContainer">
 
         </div>
-
-
-
-        <script>
-            // Function to insert data into MongoDB
-            async function insertData() {
-                try {
-                    debugger;
-                    const muscleDataDiv = document.getElementById("muscleData");
-                    const spans = muscleDataDiv.querySelectorAll('span');
-                    const data = {};
-                    spans.forEach(span => {
-                        const muscleName = span.parentNode.textContent.split(':')[0].trim();
-                        const muscleValue = span.textContent.trim();
-
-                        data[muscleName] = muscleValue;
-                    });
-
-                    const response = await axios.post('http://localhost:3000/insert', data);
-                    console.log(response.data);
-                } catch (error) {
-                    console.error('Error inserting data:', error);
-                }
-            }
-
-            // Function to fetch data from MongoDB
-            async function fetchData() {
-                try {
-
-
-                    const response = await axios.get('http://localhost:3000/fetch');
-                    const data = response.data;
-
-                    // Clear previous data
-                    const dataContainer = document.getElementById('dataContainer');
-                    dataContainer.innerHTML = '';
-
-                    // Iterate over each data object
-                    data.forEach((item, index) => {
-                        // Create a new <div> element to hold the data
-                        const itemDiv = document.createElement('div');
-                        itemDiv.classList.add('data-item');
-
-                        // Construct HTML content for each data item
-                        let htmlContent = `<h3>User ${index + 1}</h3><ul>`;
-                        for (const key in item) {
-                            if (key !== '_id') { // Exclude _id field
-                                htmlContent += `<li><strong>${key}:</strong> ${item[key]}</li>`;
-                            }
-                        }
-                        htmlContent += '</ul>';
-
-                        // Set the HTML content of the <div> element
-                        itemDiv.innerHTML = htmlContent;
-
-                        // Append the <div> element to the container
-                        dataContainer.appendChild(itemDiv);
-                    });
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                }
-            }
-        </script>
 
 
         <div id="muscleData">

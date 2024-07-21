@@ -17,7 +17,7 @@ header {
 
 header container {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
 
 header img {
@@ -25,22 +25,8 @@ header img {
     width: 150px;
 }
 
-header h1 {
-    margin: 0;
-    text-align: center;
-}
-
-header ol {
-    list-style: none;
-    padding: 0;
-    text-align: left;
-}
-
 header ol li {
-    /*inline block to not list the mout of block*/
     display: inline-block;
-    margin-top: 35px;
-    margin-bottom: 10px;
     margin-left: 10px;
     margin-right: 10px;
 }
@@ -57,8 +43,8 @@ header ol li a:hover {
 /* DIV */
 
 div {
-    max-width: 600px;
-    margin: 20px auto;
+    max-width: 1900px;
+    margin: 20px;
     padding: 20px;
     background-color: #fff;
     border-radius: 10px;
@@ -153,4 +139,17 @@ footer ol li a img {
     background-color: rgba(255, 0, 0, 0.5);
     /* Default to semi-transparent red */
     pointer-events: none;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+    /* Adjust as needed */
+    gap: 20px;
+    /* Adds spacing between items */
+}
+
+/* Ensure individual divs do not exceed their intended max-width */
+.grid-container>div {
+    /* Makes sure divs adapt to the grid container */
 }
