@@ -167,43 +167,49 @@ function updateMuscleGroups() {
 
     function incrementMuscleGroups(groups) {
         var updatedMuscleGroups = "";
-        //WEEKLY GOAL REACHED! Start
-        var highValueMuscleGroups = "";
-        //WEEKLY GOAL REACHED! End
-
         for (group in groups) {
             if (groups.hasOwnProperty(group)) { //NOT REALLY NEED THIS LINE OF CODE.
                 var element = muscleGroups[group];
                 var currentValue = parseFloat(element.textContent);
                 element.textContent = currentValue + groups[group];
 
-                //WEEKLY GOAL REACHED! Start
-                var newValue = currentValue + groups[group];
-                element.textContent = newValue.toFixed(1);
-
-                if (newValue >= 16) {
-                    highValueMuscleGroups += `<p>${group.replace(/([a-z])([A-Z])/g, '$1 $2').toUpperCase()}: ${newValue.toFixed(1)}</p>`;
-                }
-                //WEEKLY GOAL REACHED! End
-
                 // Construct the string representation without symbols "" and {}
                 updatedMuscleGroups += group + ": " + groups[group] + " ";
             }
 
-            //WEEKLY GOAL REACHED! Start
-            document.getElementById("highValueMuscleGroups").innerHTML = highValueMuscleGroups;
-            //WEEKLY GOAL REACHED! End
+
         }
         // Display only the latest updated values in an alert message
         var alertMessage = document.getElementById('alertMessage');
         alertMessage.textContent = "Updated Muscle Groups:\n" + updatedMuscleGroups;
 
         alertMessage.classList.remove('d-none');
+
+        //WEEKLY GOAL REACHED! Start
+        updateHighValueMuscleGroups();
+
+        //WEEKLY GOAL REACHED! End
     }
 
+    //WEEKLY GOAL REACHED! Start
+    function updateHighValueMuscleGroups() {
+        var highValueMuscleGroupsDiv = document.getElementById('highValueMuscleGroups');
+        highValueMuscleGroupsDiv.innerHTML = ''; // Clear previous content
 
-
-
+        for (var group in muscleGroups) {
+            if (muscleGroups.hasOwnProperty(group)) {
+                var element = muscleGroups[group];
+                var value = parseFloat(element.textContent);
+                if (value > 15) {
+                    var div = document.createElement('div');
+                    div.textContent = group + ": " + value;
+                    highValueMuscleGroupsDiv.appendChild(div);
+                }
+            }
+        }
+    }
+    //WEEKLY GOAL REACHED! End
 
 }
+
 
